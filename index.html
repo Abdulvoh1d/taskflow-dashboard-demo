@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5ef">
+  <meta name="description" content="TaskFlow is a local-demo team task board with sample work items.">
+  <title>TaskFlow — Team board</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="#board" aria-label="TaskFlow home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-word">taskflow<span class="brand-period">.</span></span>
+      </a>
+      <div class="workspace-switcher">
+        <span class="workspace-icon" aria-hidden="true">N</span>
+        <span class="workspace-copy"><strong>Studio North</strong><small>Workspace</small></span>
+        <span class="chevron" aria-hidden="true">⌄</span>
+      </div>
+      <p class="nav-label">YOUR SPACE</p>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <a class="nav-item" href="#board"><span class="nav-icon" aria-hidden="true">⌂</span>Overview</a>
+        <a class="nav-item active" href="#board" aria-current="page"><span class="nav-icon board-icon" aria-hidden="true">▦</span>My board<span class="nav-count" id="nav-count">9</span></a>
+        <a class="nav-item" href="#team"><span class="nav-icon" aria-hidden="true">♧</span>Team</a>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <section class="sidebar-note" aria-label="Demo information">
+        <div class="note-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M32 50V29" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M31 37C20 37 14 31 14 20c11 0 18 5 18 16M33 31c0-11 6-18 17-18 0 11-6 18-17 18Z" fill="#dce9d9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M23 50h19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <span class="note-label">A NOTE FOR THE TEAM</span>
+        <strong>Make room for good work.</strong>
+        <p>A calmer board for the next thoughtful step.</p>
+      </section>
+      <div class="profile-row">
+        <span class="avatar avatar-me" aria-label="Alex Morgan">AM</span>
+        <span class="profile-copy"><strong>Alex Morgan</strong><small>Product designer</small></span>
+        <button class="icon-button profile-more" type="button" aria-label="Profile options" title="Profile options">···</button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="board">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Studio North</span><span class="crumb-slash">/</span><strong>My board</strong></div>
+        <div class="topbar-right"><span class="local-badge"><span class="status-dot"></span>LOCAL DEMO</span><button class="help-button" id="help-button" type="button" aria-label="About this local demo" title="About this local demo">?</button></div>
+      </header>
+
+      <section class="board-intro" id="team" aria-labelledby="board-title">
+        <div class="intro-copy-block">
+          <div class="eyebrow"><span class="eyebrow-line"></span>STUDIO NORTH <span class="eyebrow-divider">/</span> TEAM WORKSPACE</div>
+          <div class="title-row"><h1 id="board-title">The work, in motion.</h1><span class="title-spark" aria-hidden="true">✳</span></div>
+          <p class="intro-copy">A shared view of what’s taking shape, one good step at a time.</p>
+        </div>
+        <div class="intro-actions"><div class="team-caption"><span class="avatar-stack" aria-label="Team members"><span class="avatar avatar-jules" title="Jules Park">JP</span><span class="avatar avatar-ravi" title="Ravi Shah">RS</span><span class="avatar avatar-mia" title="Mia Chen">MC</span><span class="avatar avatar-extra" title="Two more teammates">+2</span></span><span class="team-caption-text">Small team, big ideas</span></div><button class="invite-button" type="button" id="invite-button"><span aria-hidden="true">＋</span> Invite</button></div>
+      </section>
+
+      <section class="board-toolbar" aria-label="Board controls">
+        <div class="view-tabs" role="tablist" aria-label="Board view"><button class="view-tab active" type="button" role="tab" aria-selected="true">Board</button><button class="view-tab" type="button" role="tab" aria-selected="false" disabled title="List view is not part of this demo">List <span class="soon-tag">SOON</span></button></div>
+        <div class="filters">
+          <label class="search-box"><svg class="search-icon" aria-hidden="true" viewBox="0 0 20 20" fill="none"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.7"/><path d="m13.2 13.2 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="sr-only">Search tasks</span><input id="search-input" type="search" placeholder="Find a task..." autocomplete="off"><kbd>/</kbd></label>
+          <label class="select-wrap"><span class="sr-only">Filter tasks by status</span><select id="status-filter"><option value="all">All statuses</option><option value="todo">To do</option><option value="progress">In progress</option><option value="review">In review</option><option value="done">Done</option></select></label>
+          <label class="select-wrap"><span class="sr-only">Filter tasks by priority</span><select id="priority-filter"><option value="all">All priorities</option><option value="high">High priority</option><option value="medium">Medium priority</option><option value="low">Low priority</option></select></label>
+          <button class="add-task-button" id="add-task-button" type="button"><span aria-hidden="true">＋</span><span>Add task</span></button>
+        </div>
+      </section>
+
+      <div class="board-meta"><p><span class="sample-dot"></span><strong>Sample board</strong><span class="meta-divider">·</span>Drag cards or use ← → to move between stages</p><button id="clear-filters" class="clear-filters" type="button" hidden>Clear filters</button></div>
+
+      <section class="kanban-board" aria-label="Task board">
+        <section class="column" data-status="todo" aria-labelledby="todo-heading"><header class="column-header"><div class="column-title"><span class="column-indicator todo-indicator"></span><h2 id="todo-heading">To do</h2><span class="column-count" data-count="todo">0</span></div><button class="column-menu" type="button" aria-label="To do column options" title="Column options">···</button></header><div class="task-list" data-list="todo" role="list" aria-label="To do tasks"></div><button class="column-add" data-add-status="todo" type="button"><span>＋</span> Add task</button></section>
+        <section class="column" data-status="progress" aria-labelledby="progress-heading"><header class="column-header"><div class="column-title"><span class="column-indicator progress-indicator"></span><h2 id="progress-heading">In progress</h2><span class="column-count" data-count="progress">0</span></div><button class="column-menu" type="button" aria-label="In progress column options" title="Column options">···</button></header><div class="task-list" data-list="progress" role="list" aria-label="In progress tasks"></div><button class="column-add" data-add-status="progress" type="button"><span>＋</span> Add task</button></section>
+        <section class="column" data-status="review" aria-labelledby="review-heading"><header class="column-header"><div class="column-title"><span class="column-indicator review-indicator"></span><h2 id="review-heading">In review</h2><span class="column-count" data-count="review">0</span></div><button class="column-menu" type="button" aria-label="In review column options" title="Column options">···</button></header><div class="task-list" data-list="review" role="list" aria-label="In review tasks"></div><button class="column-add" data-add-status="review" type="button"><span>＋</span> Add task</button></section>
+        <section class="column" data-status="done" aria-labelledby="done-heading"><header class="column-header"><div class="column-title"><span class="column-indicator done-indicator"></span><h2 id="done-heading">Done</h2><span class="column-count" data-count="done">0</span></div><button class="column-menu" type="button" aria-label="Done column options" title="Column options">···</button></header><div class="task-list" data-list="done" role="list" aria-label="Done tasks"></div><button class="column-add" data-add-status="done" type="button"><span>＋</span> Add task</button></section>
+      </section>
+      <footer class="app-footer"><span>Thoughtful work happens together.</span><span>Edits saved in this browser <span class="footer-lock" aria-hidden="true">⌑</span></span></footer>
+    </main>
+  </div>
+
+  <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title">
+    <form id="task-form">
+      <div class="dialog-heading"><div><span class="dialog-kicker">MAKE THE NEXT STEP CLEAR</span><h2 id="dialog-title">Add a task</h2><p>Give the team a little more clarity.</p></div><button class="dialog-close" type="button" aria-label="Close dialog" id="close-dialog">×</button></div>
+      <label class="field-label" for="task-title">Task name <span>*</span></label><input class="form-input" id="task-title" name="title" maxlength="90" required placeholder="What needs to get done?">
+      <label class="field-label" for="task-description">Description <span class="optional-label">OPTIONAL</span></label><textarea class="form-input form-textarea" id="task-description" name="description" maxlength="240" rows="3" placeholder="Add a little context..."></textarea>
+      <div class="form-grid"><div><label class="field-label" for="task-priority">Priority</label><select class="form-input" id="task-priority" name="priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></div><div><label class="field-label" for="task-assignee">Assignee</label><select class="form-input" id="task-assignee" name="assignee"><option value="Alex Morgan">Alex Morgan</option><option value="Jules Park">Jules Park</option><option value="Ravi Shah">Ravi Shah</option><option value="Mia Chen">Mia Chen</option><option value="Unassigned">Unassigned</option></select></div></div>
+      <label class="field-label" for="task-status">Add to</label><select class="form-input" id="task-status" name="status"><option value="todo">To do</option><option value="progress">In progress</option><option value="review">In review</option><option value="done">Done</option></select>
+      <div class="dialog-actions"><button class="cancel-button" type="button" id="cancel-dialog">Cancel</button><button class="submit-button" type="submit">Create task <span aria-hidden="true">→</span></button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="sr-only" id="board-announcer" aria-live="polite"></div>
+</body>
+</html>
